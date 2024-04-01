@@ -1,0 +1,89 @@
+.box
+{
+    position: fixed;
+    bottom: 73px;
+    margin-right: 75px;
+
+    display: flex;
+    width: auto;
+    max-width: 1000px;
+    min-width: 400px;
+    justify-content: center;
+    align-items: center;
+
+}
+
+.newMessage{
+
+    order: -1;
+    display: flex;
+    gap: 10px;
+}
+.new
+{
+    width: auto;
+    max-width: 800px;
+    min-width: 300px;
+    
+}
+textarea{
+    width: auto;
+    max-width: 900px;
+    min-width: 300px;
+    height: fit-content;
+}
+#newMessage
+{
+    width: auto;
+    max-width: 900px;
+    min-width: 250px;
+    height: 40px;
+    text-wrap: wrap;
+    padding: 0 15px;
+    border-radius: 25px;
+    border: rgb(221, 128, 14) solid 1px;
+    background-color: #faedca;
+    color: rgb(100, 55, 1);
+    
+}
+
+
+
+#newMessage ::placeholder
+{
+    color: rgb(221, 128, 14);
+}
+.newMessage button
+{
+    border: none;
+    border-radius: 50%;
+    width: 40px;
+    background-color: #faedca;
+}
+.newMessage button:hover{
+    background-color:#f2c078 ;
+}
+.cancel
+{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #faedca;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    position: absolute;
+    bottom: 50px;
+    margin-left: 290px;
+}
+.cancel :hover
+{
+    background-color: #f2c078;
+    width: 40px;
+    border-radius: 50%;
+    height: 40px;
+}
+.plus
+{
+    margin-left: 300px;
+}

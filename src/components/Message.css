@@ -1,0 +1,228 @@
+.Message
+{
+    display: flex;
+    
+  
+    width: auto;
+    max-width: 600px;
+    margin-left: 25px;
+    margin-right: 85px;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 9px;
+}
+.user
+{
+    
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    
+}
+.userAva
+{
+    border: #7EBC89 solid 1px;
+    justify-content: center;
+    align-items: center;
+    width: 45px;
+    display: flex;
+    height: 45px;
+    border-radius: 50%;
+}
+.userInfo{
+    
+    display: flex;
+    flex-direction: column;
+    width: auto;
+    justify-content: space-between;
+}
+.userName
+{
+    
+    display: flex;
+    align-items: center;
+    font-weight: 700;
+    font-size: 22px;
+}
+.sentTime
+{
+    
+    padding: 0;
+    margin: 0;
+    font-weight: 400;
+    display: flex;
+    align-items: flex-end;
+    padding-bottom: 2px;
+    font-size: 15px;
+}
+.MessContent
+{
+    
+    display: flex;
+    gap: 10px;
+
+}
+.line
+{
+    
+    width: 2px;
+    background-color: #B1A5A5;
+    border-radius: 5px;
+}
+.actions
+{
+    display: flex;
+    width: 100px;
+    justify-content: space-between;
+    padding-left: 10px;
+}
+.MessComps
+{
+    display: flex;
+    flex-direction: column;
+    gap: 9px;
+}
+.text
+{
+    
+    background-color: #7EBC89;
+    border-radius: 10px;
+    padding-left: 15px;
+    padding-right: 15px;
+    padding-top: 5px;
+    padding-bottom: 15px;
+}
+.like_act
+{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 28px;
+    height: 28px;
+}
+svg{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;    
+
+}
+
+
+.active_comp svg path{
+    fill:red;
+    stroke: red;   
+}
+.active_comp_b svg path{
+    fill: #009BBD;
+    stroke: #009BBD;   
+}
+.Comment {
+    display: block;
+}
+
+.commentBar
+{
+    display: flex;
+    flex-direction: column;
+    justify-content: right;
+    align-items: flex-end;
+}
+
+.commentBar .userInfo{
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+    padding-right: 10px;
+}
+
+.commentBar .userName
+{
+    order: 1;
+}
+#commentBar
+{
+    background-color: #b4aeae;
+    border: none;
+    border-radius: 15px;
+    padding: 10px 15px;
+}
+.commentBar .button
+{
+    position: absolute;
+    margin-top: 88px;
+
+}
+.commentBar button
+{
+    height: 40px;
+    border: none;
+    
+    background-color: #8a8080;
+}
+.commentBar .actions
+{     
+    display: flex;
+    width: 100px;
+    align-items: end;
+    flex-direction: column; 
+    margin-top: 35px;
+    margin-right: 10px;
+}
+
+.commentBar .actions .actOtions
+{
+    display: flex;
+    width: 100px;
+    justify-content: center;
+    flex-direction: column;
+  
+    gap: 5px;
+    position:sticky;
+    background-color:#faedca ;
+    border-radius: 15px;
+    display: none;
+    position: absolute;
+    margin-top: -80px;
+    
+}
+
+
+
+.commentBar .actions .change
+{
+    display: flex;
+    width: auto;
+    justify-content: left;
+    padding-left: 10px;
+    padding-top: 10px;
+    border-radius: 15px 15px 0 0;
+    gap: 10px;
+    
+}
+.commentBar .actions .change:hover
+{
+    background-color: #f2c078;
+    overflow: hidden;
+}
+
+.commentBar .actions .delete
+{
+    gap: 10px;
+    padding-left: 10px;
+    padding-bottom: 10px;
+    display: flex;
+    width: auto;
+    justify-content: left;
+    cursor: pointer;
+    border-radius: 0 0 15px 15px;
+}
+.commentBar .actions .delete:hover
+{
+    background-color: #f2c078;
+    overflow: hidden;
+}
+.commentBar .actions .option
+{
+    cursor: pointer;
+}

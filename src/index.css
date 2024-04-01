@@ -1,0 +1,345 @@
+:root {
+  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+
+  color-scheme: light dark;
+  color: rgba(255, 255, 255, 0.87);
+  background-color: #242424;
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.Blank{
+  height: 70px;
+}
+
+a {
+  font-weight: 500;
+  color: #bd5b00;
+  text-decoration: inherit;
+}
+a:hover {
+  color: #bd5b00;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  display: flex;
+  place-items: center;
+  min-width: 320px;
+  min-height: 100vh;
+  background-color: #fffcf4;
+  justify-content: center;
+ 
+}
+
+
+
+
+
+.logo_user {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: center;
+
+  height: 100px;
+  margin-top: 10px;
+}
+.content {
+  padding-top: 70px;
+  padding-left: 20px;
+  margin-left: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 15px;
+}
+.form {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 10px;
+}
+h1 {
+  font-size: 2.5em;
+  line-height: 1.1;
+
+  margin: 0;
+  margin-bottom: 15px;
+}
+.login_page_q {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.login_page_p {
+  display: flex;
+  flex-direction: column;
+
+  align-items: flex-start;
+  padding: 0;
+  margin: 0;
+}
+
+.input_login {
+  display: flex;
+  border: #1a1a1a 1px solid;
+  border-radius: 36px;
+  width: 250px;
+  height: 50px;
+  padding-left: 25px;
+  background-color: #faedca;
+}
+
+.input_login ::placeholder {
+  align-self: center;
+}
+.label_login {
+  padding-left: 15px;
+}
+.additionalInfo {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+}
+
+button.Submit {
+  border-radius: 20px;
+  background-color: #f2c078;
+  border: 1px solid black;
+  padding: 0em 1.2em;
+  font-size: 1.5em;
+  font-weight: 500;
+  font-family: inherit;
+  color: #bd5b00;
+  cursor: pointer;
+  transition: border-color 0.25s;
+  height: 50px;
+}
+button:hover {
+  border-color: #bd5b00;
+}
+button:focus,
+button:focus-visible {
+  outline: 4px auto -webkit-focus-ring-color;
+}
+.Header_prof {
+  height: 55px;
+  width: 100%;
+  background-color: #faedca;
+  margin-top: auto;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1;
+  display: flex;
+  
+  justify-content: space-around;
+  padding-right: 20px;
+  gap: 200px;
+}
+.HeaderBookmark {
+  height: 55px;
+  width: 100%;
+  background-color: #faedca;
+  margin-top: auto;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  padding-right: 20px;
+  gap: 200px;
+  font-size: 30px;
+  font-weight: 500;
+}
+
+
+.Header {
+  height: 55px;
+  width: 100%;
+  background-color: #faedca;
+  margin-top: auto;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1;
+  display: flex;
+  
+  justify-content: space-around;
+  padding-right: 20px;
+  gap: 200px;
+}
+
+.Header .home {
+  display: flex;
+  justify-content: center;
+  font-weight: 500;
+  font-size: 30px;
+}
+.Header_prof .home {
+  display: flex;
+  justify-content: center;
+  font-weight: 500;
+  font-size: 30px;
+}
+.Header_prof .logOut
+{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.Header_prof a
+{
+  width: 30px;
+  height: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.Header_prof a:hover{
+  background-color:#f2c078;
+  width: 30px;
+  height: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+}
+
+.nav {
+  display: flex;
+  justify-content: center;
+}
+.NavBar {
+  height: 55px;
+  width: 80%;
+  background-color: #faedca;
+  margin-top: auto;
+  border-radius: 25px;
+  position: fixed;
+  bottom: 15px;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+.NavBar > div{
+  width: 42px;
+  height: 42px;
+
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+
+.NavBar .active {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 42px;
+  height: 42px;
+  background-color: #f2c078;
+  border-radius: 25px;
+}
+.NavBar .i_home {
+  display: flex;
+}
+
+.NavBar .i_book {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-top: 2px;
+}
+.NavBar .i_me {
+  display: flex;
+}
+
+.Footer {
+  height: 55px;
+  width: 100%;
+  background-color: #faedca;
+  margin-top: auto;
+
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  z-index: 1;
+}
+
+@media (prefers-color-scheme: light) {
+  :root {
+    color: #213547;
+    background-color: #ffffff;
+  }
+  a:hover {
+    color: #bd5b00;
+  }
+  a:active {
+    color: #bd5b00;
+  }
+  button {
+    background-color: #f2c078;
+  }
+}
+
+.img-display-after
+{
+  height: 200px;
+  width: 200px;
+  border-radius: 50%;
+}
+
+.img-display-before
+{
+  height: 200px;
+  width: 200px;
+  border-radius: 50%;
+}
+
+.profForm{
+  display: flex;
+  justify-content: left;
+  width: 250px;
+  
+  
+}
+.BoxName
+{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-left: 80px;
+}
+.profForm input{
+  width: 230px;
+  height: 30px;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  padding-left: 10px;
+  border-radius: 20px;
+  border:#f2c078 solid 1px;
+  background-color: #faedca;
+}
+.profForm button
+{
+  position: absolute;
+  margin: 80px 75px;
+  width: 100px;
+  height: 30px;
+  border: #bd5b00 1px solid;
+  border-radius: 20px;
+}
