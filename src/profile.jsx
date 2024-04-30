@@ -4,12 +4,14 @@ import React, { useState } from "react";
 import pic from "./assets/profile.png";
 import { useRef } from "react";
 import Blank from "./components/Blank.jsx";
+import { getAuth, updateProfile, updatePassword } from "firebase/auth";
+import { auth } from "./firebaseConfig";
 
 const Profile = () => {
   const [isEditing, setIsEditing] = useState(false);
-  const [firstName, setFirstName] = useState("Akito");
-  const [Password, setPassword] = useState("Raozas");
-  const asteriskString = "*".repeat(Password.length);
+  const [password, setPassword] = useState("admin");
+
+  const asteriskString = "*".repeat(password.length);
   const [image, setImage] = useState("");
   const inputRef = useRef(null);
 
@@ -20,6 +22,31 @@ const Profile = () => {
     const file = e.target.files[0];
     console.log(file);
     setImage(e.target.files[0]);
+  };
+
+  const [displayName, setDisplayName] = useState("");
+
+  const user = auth.currentUser;
+
+  const handleSubmit = () => {
+    if (user) {
+      updateProfile(user, { displayName: displayName })
+        .then(() => {
+          // Profile updated
+          if (password) {
+            updatePassword(user, password)
+              .then(() => {
+                // Password updated
+              })
+              .catch((error) => {
+                // An error occurred
+              });
+          }
+        })
+        .catch((error) => {
+          // An error occurred
+        });
+    }
   };
 
   return (
@@ -44,7 +71,7 @@ const Profile = () => {
             id=""
             ref={inputRef}
             onChange={handleImageChange}
-            style={{ display: "none" }}
+            // style={{ display: "none" }}
           />
         </div>
 
@@ -56,17 +83,16 @@ const Profile = () => {
           }}
         >
           <label>
-            First name:{""} <br />
+            Name:{""} <br />
             {isEditing ? (
               <input
-                value={firstName}
-                onChange={(e) => {
-                  setFirstName(e.target.value);
-                }}
+                type="text"
+                value={displayName}
+                onChange={(event) => setDisplayName(event.target.value)}
               />
             ) : (
               <div className="BoxName">
-                <b style={{ fontSize: "30px" }}>{firstName}</b>
+                <b style={{ fontSize: "30px" }}>{displayName}</b>
               </div>
             )}
           </label>
@@ -81,20 +107,24 @@ const Profile = () => {
           <label>
             Password:{""} <br />
             {isEditing ? (
-              <input
-                type="password"
-                value={Password}
-                onChange={(e) => {
-                  setPassword(e.target.value);
-                }}
-              />
+              <div>
+                <input
+                  type="password"
+                  value={password}
+                  onChange={(e) => {
+                    setPassword(e.target.value);
+                  }}
+                />
+              </div>
             ) : (
               <div className="BoxName">
                 <b style={{ fontSize: "30px" }}>{asteriskString}</b>
               </div>
             )}
           </label>
-          <button type="submit">{isEditing ? "Save" : "Edit"} </button>
+          <button type="submit" onClick={isEditing ? handleSubmit : null}>
+            {isEditing ? "Save" : "Edit"}{" "}
+          </button>
         </form>
         <Blank />
       </div>
@@ -104,4 +134,4 @@ const Profile = () => {
     </div>
   );
 };
-export default Profile;
+export default Profile; 

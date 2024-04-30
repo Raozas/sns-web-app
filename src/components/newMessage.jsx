@@ -1,17 +1,28 @@
-import React, { createElement, useState } from "react";
-import { useRef } from "react";
+import {useState} from "react";
 
 
-const NewMessage = () => {
-  const inputRef = useRef(null);
+const NewMessage = ({ data }) => {
+  const [message, setMessage] = useState('');
   const [isButton, setIsButton] = useState(true);
+
+  const { user, content, time, isLiked, isBookmarked, isCommented } = data;
+
   const handleClick = () => {
     setIsButton(false);
   };
+  const handleInputChange = (e) => {
+    setMessage(e.target.value);
+  };
   const handleCancelClick = () => {
     setIsButton(true);
+    setMessage('');
   };
-
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    // Here you can handle the submit event, for example, send the message to the server
+    console.log(message);
+    setMessage('');
+  };
   return (
     <div className="box">
       {isButton ? (
@@ -23,7 +34,7 @@ const NewMessage = () => {
             fill="none"
             xmlns="http://www.w3.org/2000/svg"
           >
-            <circle cx="23" cy="23" r="23" fill="#FAEDCA" />
+            <circle cx="23" cy="23" r="23" fill="#FAEDCA"/>
             <path
               d="M12.0632 24H34.0632"
               stroke="#FFC938"
@@ -39,18 +50,15 @@ const NewMessage = () => {
           </svg>
         </div>
       ) : (
-        <div className="newMessage" >
-        
-          
-          <input 
-          type="text" 
-          id="newMessage" 
-          
-          placeholder="New Message" 
-          
+        <div className="newMessage">
+          <input
+            type="text"
+            id="newMessage"
+            placeholder="New Message"
+            value={message}
+            onChange={handleInputChange}
           />
-          
-          <button type="submit">
+          <button type="submit" onClick={handleSubmit}>
             <svg
               width="25"
               height="25"

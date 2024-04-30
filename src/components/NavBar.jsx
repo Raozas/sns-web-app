@@ -4,7 +4,6 @@ const NavBar = () => {
   const location = useLocation();
   let { hash, pathname, search } = location;
   pathname = pathname.toLocaleLowerCase();
-  console.log(location);
   return (
     <div className="NavBar">
    
@@ -25,7 +24,6 @@ const NavBar = () => {
       </div>
       <div
         className={`i_book ${pathname == "/bookmark" || pathname == "/saved" ? "active" : ""}`}
-        onClick={() => console.log("clicked")}
       >
         <Link to="../bookmark">
           <svg

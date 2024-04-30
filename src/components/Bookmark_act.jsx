@@ -1,15 +1,14 @@
 import React, { useState } from "react";
 
-const Bookmark_act = () => {
-  const [isActive, setIsActive] = useState(false);
+const Bookmark_act = ({ data, isBookmarked, onClick }) => {
 
   const handleClick = () => {
-    setIsActive(!isActive);
+    onClick(data.id);
   };
 
   return (
     <div
-      className={`Bookmark_act ${isActive ? "active_comp_b" : ""}`}
+      className={`Bookmark_act ${isBookmarked ? "active_comp_b" : ""}`}
       onClick={handleClick}
     >
       <svg

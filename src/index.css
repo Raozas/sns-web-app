@@ -2,9 +2,9 @@
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
   font-weight: 400;
-
+  
   color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
+  color: #213547;
   background-color: #242424;
 
   font-synthesis: none;
@@ -35,7 +35,7 @@ body {
   min-height: 100vh;
   background-color: #fffcf4;
   justify-content: center;
- 
+
 }
 
 
@@ -141,7 +141,7 @@ button:focus-visible {
   left: 0;
   z-index: 1;
   display: flex;
-  
+
   justify-content: space-around;
   padding-right: 20px;
   gap: 200px;
@@ -175,7 +175,7 @@ button:focus-visible {
   left: 0;
   z-index: 1;
   display: flex;
-  
+
   justify-content: space-around;
   padding-right: 20px;
   gap: 200px;
@@ -296,11 +296,12 @@ button:focus-visible {
   }
 }
 
-.img-display-after
-{
-  height: 200px;
-  width: 200px;
-  border-radius: 50%;
+.img-display-after {
+    width: 100%;
+    max-width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    object-fit: cover;
 }
 
 .img-display-before
@@ -314,8 +315,8 @@ button:focus-visible {
   display: flex;
   justify-content: left;
   width: 250px;
-  
-  
+
+
 }
 .BoxName
 {

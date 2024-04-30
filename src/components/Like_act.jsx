@@ -1,14 +1,13 @@
 import React, { useState } from "react";
 
-const Like_act = () => {
-  const [isActive, setIsActive] = useState(false);
+const Like_act = ({data, isLiked, onClick}) => {
 
   const handleClick = () => {
-    setIsActive(!isActive);
+    onClick(data.id);
   };
 
   return (
-    <div className={`Like_act ${isActive ? "active_comp" : ""}`} onClick={handleClick}>
+    <div className={`Like_act ${isLiked ? "active_comp" : ""}`} onClick={handleClick}>
       <svg
         width="25"
         height="23"

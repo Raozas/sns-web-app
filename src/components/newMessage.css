@@ -14,10 +14,14 @@
 }
 
 .newMessage{
-
+    width: auto;
+    max-width: 1000px;
     order: -1;
     display: flex;
     gap: 10px;
+    position: fixed;
+    bottom: 73px;
+    margin-right: 75px;
 }
 .new
 {
@@ -32,21 +36,17 @@ textarea{
     min-width: 300px;
     height: fit-content;
 }
-#newMessage
-{
-    width: auto;
-    max-width: 900px;
+.newMess {
+    width: 100%;
     min-width: 250px;
     height: 40px;
-    text-wrap: wrap;
     padding: 0 15px;
     border-radius: 25px;
-    border: rgb(221, 128, 14) solid 1px;
+    border: 1px solid rgb(221, 128, 14);
     background-color: #faedca;
     color: rgb(100, 55, 1);
-    
+    word-wrap: break-word;
 }
-
 
 
 #newMessage ::placeholder
@@ -57,7 +57,7 @@ textarea{
 {
     border: none;
     border-radius: 50%;
-    width: 40px;
+    width: 60px;
     background-color: #faedca;
 }
 .newMessage button:hover{

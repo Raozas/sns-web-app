@@ -1,17 +1,19 @@
 .MyMessage
 {
     display: flex;
-    
+    align-items: flex-end;
    
-    width: auto;
-    max-width: 600px;
+    
+    width: 400px;
     margin-left: 25px;
     margin-right: 85px;
     flex-direction: column;
     justify-content: space-between;
     gap: 9px;
-    
+    word-wrap: break-word; 
+    overflow-wrap: break-word;
 }
+
 .userMe
 {
     
@@ -60,7 +62,7 @@
 }
 .MyMessage .MessContent
 {
-    
+
     display: flex;
     gap: 10px;
     flex-direction: row-reverse;
@@ -161,7 +163,22 @@
     padding-top: 5px;
     padding-bottom: 25px;
     display: flex;
+    width: 360px;
     
+}
+
+.MyMessage .text textarea{
+    background-color: #d8d6d6;
+    border: none;
+    width: 100%;
+    height: max-content;
+}
+
+.MyMessage .text button{
+    width: 100%;
+    cursor: pointer;
+    border: 1px solid #bd5b00;
+    height: 25px;
 }
 .like_act
 {
