@@ -1,16 +1,42 @@
-import { format } from "date-fns";
+import { format, set } from "date-fns";
 import React, { useState } from "react";
 import Comment_act from "./Comment_act";
 import { getAuth } from "firebase/auth";
-import { doc, deleteDoc } from "firebase/firestore";
+import {
+  doc,
+  deleteDoc,
+  arrayUnion,
+  updateDoc,
+  setDoc,
+} from "firebase/firestore";
 import { db } from "../firebaseConfig";
 
-const Comment = ({ data, messageID }) => {
+const Comment = ({ data, messageID, setComments }) => {
   const { user, content, time } = data;
   const [isVisible, setIsVisible] = useState(false);
   const [isButton, setIsButton] = useState(false);
   const [readOnly, setReadOnly] = useState(false);
+  const [newComment, setNewComment] = useState("");
+  const [isCommented, setIsCommented] = useState(false); // Add this line
+  const [isEditing, setIsEditing] = useState(false);
+  const [updatedComment, setUpdatedComment] = useState(content);
 
+  const handleEdit = () => {
+    setIsEditing(true);
+  };
+
+  const handleSave = async () => {
+    const commentRef = doc(db, "messages", messageID, "comments", data.id);
+    await updateDoc(commentRef, {
+      content: updatedComment,
+    });
+    setIsEditing(false);
+    setComments((prevComments) =>
+      prevComments.map((comment) =>
+        comment.id === data.id ? { ...comment, content: updatedComment } : comment
+      )
+    );
+  };
   const currentUser = getAuth().currentUser.displayName;
 
   const handleClick = () => {
@@ -23,10 +49,13 @@ const Comment = ({ data, messageID }) => {
   };
 
   const handleDelete = async () => {
-    const commentRef =  doc(db, "messages", messageID, "comments", data.id);
-    
+    const commentRef = doc(db, "messages", messageID, "comments", data.id);
+
     await deleteDoc(commentRef);
-    console.log(commentRef);
+    console.log(setComments);
+    setComments((oldComments) =>
+      oldComments.filter((comment) => comment.id !== data.id)
+    );
   };
 
   return (
@@ -39,10 +68,21 @@ const Comment = ({ data, messageID }) => {
           </div>
         </div>
       </div>
-      <div className="commentContent">{content}</div>
-
-      <div className="isComment">
-        <Comment_act isCommented={false} />
+      <div className="commentContent">
+        {isEditing ? (
+          <div>
+            <input
+              type="text"
+              value={updatedComment}
+              onChange={(e) => setUpdatedComment(e.target.value)}
+            />
+            <button onClick={handleSave}>Save</button>
+          </div>
+        ) : (
+          <div>
+            <p>{content}</p>
+          </div>
+        )}
       </div>
       {currentUser === user && (
         <div className="button">
@@ -78,7 +118,7 @@ const Comment = ({ data, messageID }) => {
                 style={{ display: isVisible ? "flex" : "none" }}
               >
                 <label htmlFor="commentBar">
-                  <div className="change" onClick={handleClick}>
+                  <div className="change" onClick={handleEdit}>
                     <svg
                       width="19"
                       height="20"
@@ -91,7 +131,7 @@ const Comment = ({ data, messageID }) => {
                         fill="black"
                       />
                     </svg>
-                    <div className="option">編集</div>
+                    <div  className="option">編集</div>
                   </div>
                 </label>
                 <div className="menuLine"></div>

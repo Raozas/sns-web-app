@@ -52,6 +52,7 @@ const Home = () => {
         isBookmarked: false,
         isCommented: false,
         content: newMessage,
+        photoUrl: user.photoURL,
       };
       const docRef = await addDoc(collection(db, "messages"), messageData);
       setMessages((oldMessages) => [

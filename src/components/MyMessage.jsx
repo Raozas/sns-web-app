@@ -14,7 +14,7 @@ import {
 import { db } from "../firebaseConfig.js";
 import Comment from "./comment.jsx";
 import Comment_act from "./Comment_act.jsx";
-import { getAuth } from "firebase/auth";
+import { getAuth, onAuthStateChanged } from "firebase/auth";
 
 const MyMessage = ({ data, setMessages, newMessage }) => {
   const [isVisible, setIsVisible] = useState(false);
@@ -25,6 +25,7 @@ const MyMessage = ({ data, setMessages, newMessage }) => {
   const { user, content, time, isLiked, isBookmarked } = data;
   const [comments, setComments] = useState([]);
   const [newComment, setNewComment] = useState("");
+  const [photoURL, setPhotoURL] = useState(null);
 
   const handleCommentSubmit = async (event) => {
     event.preventDefault();
@@ -51,6 +52,13 @@ const MyMessage = ({ data, setMessages, newMessage }) => {
       setComments(commentsList);
       setIsCommented(commentsList.length > 0);
     }
+
+    const auth = getAuth();
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        setPhotoURL(user.photoURL);
+      }
+    });
 
     getComments();
   }, [data.id]);
@@ -91,7 +99,7 @@ const MyMessage = ({ data, setMessages, newMessage }) => {
   return (
     <div className="MyMessage" id="MyMessage">
       <div className="userMe">
-        <div className="userAva"></div>
+        <div className="userAva">{photoURL && <img  src={photoURL} alt="User" />}</div>
         <div className="userInfo">
           <div className="userName">{user}</div>
           <div className="sentTime">
@@ -193,7 +201,7 @@ const MyMessage = ({ data, setMessages, newMessage }) => {
             )}
 
             {comments.map((comment) => (
-              <Comment key={comment.id} messageID={data.id} data={comment} />
+              <Comment key={comment.id} messageID={data.id} setComments={setComments} data={comment} />
             ))}
             <div></div>
           </div>

@@ -5,7 +5,18 @@ import { useEffect, useState } from "react";
 import Comment from "./comment.jsx";
 import format from "date-fns/format";
 import "./MyMessage.css";
-import { doc, updateDoc, collection, getDocs, addDoc, query, orderBy, Timestamp } from "firebase/firestore";
+import {
+  doc,
+  updateDoc,
+  collection,
+  getDocs,
+  addDoc,
+  query,
+  orderBy,
+  Timestamp,
+  where,
+  getFirestore
+} from "firebase/firestore";
 import { db } from "../firebaseConfig.js"; // import your Firestore instance
 import { getAuth } from "firebase/auth";
 import { set } from "date-fns";
@@ -19,20 +30,26 @@ const Message = ({ data }) => {
   const [comments, setComments] = useState([]);
   const [newComment, setNewComment] = useState("");
   const [isCommented, setIsCommented] = useState(false);
+  const [photoURL, setPhotoURL] = useState(data.photoUrl);
 
   useEffect(() => {
     async function getComments() {
-      const messageRef = doc(db, 'messages', data.id);
-      const commentsCollection = collection(messageRef, 'comments');
+      const messageRef = doc(db, "messages", data.id);
+      const commentsCollection = collection(messageRef, "comments");
       const q = query(commentsCollection, orderBy("time", "asc")); // sort by time in descending order
       const commentsSnapshot = await getDocs(q);
-      const commentsList = commentsSnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+      const commentsList = commentsSnapshot.docs.map((doc) => ({
+        id: doc.id,
+        ...doc.data(),
+      }));
       setComments(commentsList);
       setIsCommented(commentsList.length > 0);
     }
 
     getComments();
   }, [data.id]);
+
+  
 
   const handleToggleVisibility = () => {
     setIsVisible(!isVisible);
@@ -44,8 +61,8 @@ const Message = ({ data }) => {
 
   const handleCommentSubmit = async (event) => {
     event.preventDefault();
-    const messageRef = doc(db, 'messages', data.id);
-    const commentsCollection = collection(messageRef, 'comments');
+    const messageRef = doc(db, "messages", data.id);
+    const commentsCollection = collection(messageRef, "comments");
     const newCommentData = {
       user: getAuth().currentUser.displayName,
       content: newComment,
@@ -78,7 +95,7 @@ const Message = ({ data }) => {
   return (
     <div className="Message">
       <div className="user">
-        <div className="userAva"></div>
+        <div className="userAva">{photoURL && <img src={photoURL} alt="User" />}</div>
         <div className="userInfo">
           <div className="userName">{user}</div>
           <div className="sentTime">
@@ -128,7 +145,7 @@ const Message = ({ data }) => {
           {comments.length > 0 && (
             <div className="Comment">
               {comments.map((comment) => (
-                <Comment key={comment.id} messageID={data.id} data={comment} />
+                <Comment key={comment.id} messageID={data.id} setComments={setComments} data={comment} />
               ))}
             </div>
           )}

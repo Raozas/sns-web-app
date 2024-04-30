@@ -1,17 +1,31 @@
 import Header_prof from "./components/Header_prof.jsx";
 import NavBar from "./components/NavBar.jsx";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import pic from "./assets/profile.png";
 import { useRef } from "react";
 import Blank from "./components/Blank.jsx";
 import { getAuth, updateProfile, updatePassword } from "firebase/auth";
-import { auth } from "./firebaseConfig";
+import { auth, storage } from "./firebaseConfig";
+import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 
 const Profile = () => {
-  const [isEditing, setIsEditing] = useState(false);
-  const [password, setPassword] = useState("admin");
+  const user = auth.currentUser;
+  const [displayName, setDisplayName] = useState();
 
-  const asteriskString = "*".repeat(password.length);
+  const [isEditing, setIsEditing] = useState(false);
+  const [password, setPassword] = useState("");
+  const [url, setUrl] = useState("");
+
+  useEffect(() => {
+    if (user) {
+      setDisplayName(user.displayName);
+      setPassword(user.password);
+      setUrl(user.photoURL);
+      console.log((window.user = user));
+    }
+  }, [user]);
+
+  const asteriskString = "*".repeat(password?.length);
   const [image, setImage] = useState("");
   const inputRef = useRef(null);
 
@@ -19,14 +33,48 @@ const Profile = () => {
     inputRef.current.click();
   };
   const handleImageChange = (e) => {
-    const file = e.target.files[0];
-    console.log(file);
-    setImage(e.target.files[0]);
+    if (e.target.files[0]) {
+      setImage(e.target.files[0]);
+    }
   };
 
-  const [displayName, setDisplayName] = useState("");
+  const handleUpload = () => {
+    if (!image) {
+      console.log("No image selected");
+      return;
+    }
 
-  const user = auth.currentUser;
+    const storageRef = ref(storage, `images/${image.name}`);
+    const uploadTask = uploadBytesResumable(storageRef, image);
+
+    uploadTask.on(
+      "state_changed",
+      (snapshot) => {
+        // You can add a progress function here to track the upload progress
+      },
+      (error) => {
+        // Handle unsuccessful uploads
+        console.log("Upload error: ", error);
+      },
+      () => {
+        // Handle successful uploads on complete
+        getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
+          console.log("File available at", downloadURL);
+          setUrl(downloadURL);
+
+          updateProfile(auth.currentUser, {
+            photoURL: downloadURL,
+          })
+            .then(() => {
+              console.log("Profile picture updated");
+            })
+            .catch((error) => {
+              console.log("Error updating profile picture: ", error);
+            });
+        });
+      }
+    );
+  };
 
   const handleSubmit = () => {
     if (user) {
@@ -53,16 +101,24 @@ const Profile = () => {
     <div>
       <Header_prof />
       <div className="content">
-        <div className="aVa" onClick={handleImageClick}>
+        <div className="aVa">
           {image ? (
-            <img
-              src={URL.createObjectURL(image)}
-              alt=""
-              className="img-display-after"
-              id="image"
-            />
+            <>
+              <img
+                src={URL.createObjectURL(image)}
+                alt=""
+                className="img-display-after"
+                id="image"
+              />
+              <button onClick={handleUpload}>Upload</button>
+            </>
           ) : (
-            <img src={pic} alt="" className="img-display-before" />
+            <img
+              onClick={handleImageClick}
+              src={url ? url : pic}
+              alt=""
+              className="img-display-before img-display-after"
+            />
           )}
 
           <input
@@ -71,7 +127,7 @@ const Profile = () => {
             id=""
             ref={inputRef}
             onChange={handleImageChange}
-            // style={{ display: "none" }}
+            style={{ display: "none" }}
           />
         </div>
 
@@ -134,4 +190,4 @@ const Profile = () => {
     </div>
   );
 };
-export default Profile; 
+export default Profile;
